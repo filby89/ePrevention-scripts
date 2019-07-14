@@ -26,7 +26,7 @@ class DataType(object):
 
 class ePreventionVisualization(object):
 	"""docstring for ePreventionVisualization"""
-	def __init__(self, data_path, resolution="10T"):
+	def __init__(self, data_path):
 		super(ePreventionVisualization, self).__init__()
 		self.data_path = data_path
 
@@ -68,7 +68,6 @@ class ePreventionVisualization(object):
 			if os.path.exists(f):
 				data_type.data = pd.read_csv(StringIO(open(f).read().replace(",",".")), delimiter=" ", error_bad_lines=False, warn_bad_lines=False)#, dtype=dtype_dict)
 
-		self.resolution = resolution
 		self.fix_timestamps()
 
 		self.get_analytics()
@@ -137,10 +136,9 @@ class ePreventionVisualization(object):
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
 	parser.add_argument('--path', type=str, help='Path to folder')
-	parser.add_argument('--resolution', type=str, help='#S for seconds, #T for minutes')
 	args = parser.parse_args()
 
-	vis = ePreventionVisualization(data_path=args.path, resolution=args.resolution)
+	vis = ePreventionVisualization(data_path=args.path)
 
 
 
